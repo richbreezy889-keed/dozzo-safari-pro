@@ -1,24 +1,36 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import hero from "@/assets/dozzo-hero-tanzania.jpg";
+import travellers from "@/assets/safari-travellers.jpg";
+import { Button } from "@/components/ui/button";
+import { DestinationGrid, Eyebrow, SafariGrid, SectionIntro } from "@/components/safari/content";
+import { GalleryGrid } from "@/components/safari/gallery";
+import { whatsappUrl } from "@/components/safari/data";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({ meta: [
+    { title: "Dozzo Safari — Experience Tanzania. Discover the Wild." },
+    { name: "description", content: "Authentic Tanzania safari experiences, from Mikumi day trips to Serengeti and Nyerere adventures." },
+    { property: "og:title", content: "Dozzo Safari — Tanzania Safari Experiences" },
+    { property: "og:description", content: "Explore Tanzania’s legendary national parks with Dozzo Safari." },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+  ] }), component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+function HomePage() {
+  return <>
+    <section className="hero-section">
+      <img src={hero} alt="Elephants crossing the Tanzanian savannah at sunset" width={1920} height={1088} className="absolute inset-0 size-full object-cover" />
+      <div className="absolute inset-0 bg-hero-shade" />
+      <div className="site-container relative flex min-h-[calc(100svh-5rem)] items-end pb-16 pt-24 md:items-center md:pb-12">
+        <div className="max-w-4xl"><Eyebrow inverse>Welcome to Tanzania</Eyebrow><h1 className="hero-title mt-6 text-hero-foreground">Experience Tanzania.<br /><span className="text-primary">Discover the Wild.</span></h1><p className="mt-6 max-w-2xl text-base leading-8 text-hero-muted md:text-lg">Explore Tanzania&apos;s legendary national parks with Dozzo Safari — from unforgettable day trips to carefully planned multi-day adventures.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><Button asChild size="xl"><Link to="/safaris">Explore Safaris <ArrowRight /></Link></Button><Button asChild variant="glass" size="xl"><a href={whatsappUrl} target="_blank" rel="noreferrer"><MessageCircle /> WhatsApp Dozzo</a></Button></div></div>
+      </div><div className="absolute bottom-0 right-0 hidden border-l border-t border-hero-foreground/15 bg-header/80 px-8 py-5 backdrop-blur-md md:block"><p className="text-xs font-bold uppercase text-primary">Based in Tanzania</p><p className="mt-1 text-sm text-hero-muted">Local knowledge. Wild journeys.</p></div>
+    </section>
+    <section className="section-space bg-background"><div className="site-container"><div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between"><SectionIntro eyebrow="Curated journeys" title="Safaris shaped around Tanzania’s wild places." text="Choose a short escape or a deeper journey. Every itinerary is a starting point for a safari planned around your time and interests." /><Button asChild variant="light" size="xl"><Link to="/safaris">View all safaris <ArrowRight /></Link></Button></div><div className="mt-12"><SafariGrid limit={3} /></div></div></section>
+    <section className="section-space bg-header"><div className="site-container"><SectionIntro inverse eyebrow="Why Dozzo Safari?" title="Tanzania is not just where we travel. It’s home." /><div className="mt-14 grid border-y border-hero-foreground/15 sm:grid-cols-2 lg:grid-cols-4">{["Tanzania-focused experiences","Carefully planned itineraries","Flexible safari options","Personalised safari planning"].map((item, index) => <div key={item} className="border-hero-foreground/15 px-0 py-7 sm:px-6 sm:[&:nth-child(even)]:border-l lg:border-l lg:first:border-l-0"><span className="font-display text-sm font-bold text-primary">0{index + 1}</span><p className="mt-6 max-w-[14rem] font-display text-xl font-bold leading-7 text-hero-foreground">{item}</p></div>)}</div></div></section>
+    <section className="section-space bg-warm"><div className="site-container"><SectionIntro eyebrow="Explore Tanzania" title="Five landscapes. Five distinct ways to encounter the wild." text="From the river systems of Nyerere to the open Serengeti, each destination has its own rhythm, wildlife and season." /><div className="mt-12"><DestinationGrid /></div></div></section>
+    <section className="grid bg-background lg:grid-cols-2"><div className="min-h-[28rem]"><img src={travellers} alt="Guests watching lions with their Tanzanian safari guide" loading="lazy" width={1408} height={1008} className="size-full object-cover" /></div><div className="flex items-center px-5 py-16 sm:px-10 lg:px-16 xl:px-24"><div className="max-w-xl"><Eyebrow>Made personal</Eyebrow><h2 className="section-title mt-5">Your safari starts with a conversation.</h2><p className="mt-6 text-base leading-8 text-muted-foreground">Tell us when you want to travel, what you hope to see and how you like to explore. We’ll help shape an itinerary that makes sense for you.</p><Button asChild size="xl" className="mt-8"><a href={whatsappUrl} target="_blank" rel="noreferrer"><MessageCircle /> Start planning</a></Button></div></div></section>
+    <section className="section-space bg-background"><div className="site-container"><div className="flex items-end justify-between gap-6"><SectionIntro eyebrow="Field notes" title="Moments from Tanzania" /><Button asChild variant="light" className="hidden sm:inline-flex"><Link to="/gallery">View gallery <ArrowRight /></Link></Button></div><div className="mt-10"><GalleryGrid limit={6} /></div></div></section>
+  </>;
 }
