@@ -10,33 +10,114 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DestinationsRouteImport } from './routes/destinations'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as SafarisRouteImport } from './routes/safaris'
+import { Route as SafarisSlugRouteImport } from './routes/safaris.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DestinationsRoute = DestinationsRouteImport.update({
+  id: '/destinations',
+  path: '/destinations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafarisRoute = SafarisRouteImport.update({
+  id: '/safaris',
+  path: '/safaris',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafarisSlugRoute = SafarisSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => SafarisRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/destinations': typeof DestinationsRoute
+  '/gallery': typeof GalleryRoute
+  '/safaris': typeof SafarisRouteWithChildren
+  '/safaris/$slug': typeof SafarisSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/destinations': typeof DestinationsRoute
+  '/gallery': typeof GalleryRoute
+  '/safaris': typeof SafarisRouteWithChildren
+  '/safaris/$slug': typeof SafarisSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/contact': typeof ContactRoute
+  '/destinations': typeof DestinationsRoute
+  '/gallery': typeof GalleryRoute
+  '/safaris': typeof SafarisRouteWithChildren
+  '/safaris/$slug': typeof SafarisSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/destinations'
+    | '/gallery'
+    | '/safaris'
+    | '/safaris/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/destinations'
+    | '/gallery'
+    | '/safaris'
+    | '/safaris/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/contact'
+    | '/destinations'
+    | '/gallery'
+    | '/safaris'
+    | '/safaris/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  ContactRoute: typeof ContactRoute
+  DestinationsRoute: typeof DestinationsRoute
+  GalleryRoute: typeof GalleryRoute
+  SafarisRoute: typeof SafarisRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +129,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/destinations': {
+      id: '/destinations'
+      path: '/destinations'
+      fullPath: '/destinations'
+      preLoaderRoute: typeof DestinationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safaris': {
+      id: '/safaris'
+      path: '/safaris'
+      fullPath: '/safaris'
+      preLoaderRoute: typeof SafarisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safaris/$slug': {
+      id: '/safaris/$slug'
+      path: '/$slug'
+      fullPath: '/safaris/$slug'
+      preLoaderRoute: typeof SafarisSlugRouteImport
+      parentRoute: typeof SafarisRoute
+    }
   }
 }
 
+interface SafarisRouteChildren {
+  SafarisSlugRoute: typeof SafarisSlugRoute
+}
+
+const SafarisRouteChildren: SafarisRouteChildren = {
+  SafarisSlugRoute: SafarisSlugRoute,
+}
+
+const SafarisRouteWithChildren =
+  SafarisRoute._addFileChildren(SafarisRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  ContactRoute: ContactRoute,
+  DestinationsRoute: DestinationsRoute,
+  GalleryRoute: GalleryRoute,
+  SafarisRoute: SafarisRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
