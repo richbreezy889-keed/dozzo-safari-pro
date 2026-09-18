@@ -1,0 +1,6 @@
+import { createFileRoute } from "@tanstack/react-router";
+import hero from "@/assets/serengeti-lions.jpg";
+import { PageHero } from "@/components/safari/content";
+import { GalleryGrid } from "@/components/safari/gallery";
+export const Route = createFileRoute("/gallery")({ head: () => ({ meta: [{ title: "Tanzania Safari Gallery — Dozzo Safari" }, { name: "description", content: "Wildlife, landscapes and safari moments from Tanzania’s national parks." }, { property: "og:title", content: "Tanzania Safari Gallery — Dozzo Safari" }, { property: "og:description", content: "A visual journey through wild Tanzania." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: GalleryPage });
+function GalleryPage() { return <><PageHero eyebrow="Through the lens" title="Wild Tanzania, frame by frame." text="A glimpse of the wildlife, landscapes and quiet moments that make every journey distinct." image={hero} /><section className="section-space bg-background"><div className="site-container"><GalleryGrid /></div></section></>; }
