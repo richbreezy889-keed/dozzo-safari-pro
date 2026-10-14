@@ -14,7 +14,11 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as NgorongoroRouteImport } from './routes/ngorongoro'
 import { Route as SafarisRouteImport } from './routes/safaris'
+import { Route as TarangireRouteImport } from './routes/tarangire'
+import { Route as ZanzibarRouteImport } from './routes/zanzibar'
+import { Route as SafarisIndexRouteImport } from './routes/safaris.index'
 import { Route as SafarisSlugRouteImport } from './routes/safaris.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -42,10 +46,30 @@ const GalleryRoute = GalleryRouteImport.update({
   path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NgorongoroRoute = NgorongoroRouteImport.update({
+  id: '/ngorongoro',
+  path: '/ngorongoro',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SafarisRoute = SafarisRouteImport.update({
   id: '/safaris',
   path: '/safaris',
   getParentRoute: () => rootRouteImport,
+} as any)
+const TarangireRoute = TarangireRouteImport.update({
+  id: '/tarangire',
+  path: '/tarangire',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ZanzibarRoute = ZanzibarRouteImport.update({
+  id: '/zanzibar',
+  path: '/zanzibar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SafarisIndexRoute = SafarisIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SafarisRoute,
 } as any)
 const SafarisSlugRoute = SafarisSlugRouteImport.update({
   id: '/$slug',
@@ -59,8 +83,12 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/destinations': typeof DestinationsRoute
   '/gallery': typeof GalleryRoute
+  '/ngorongoro': typeof NgorongoroRoute
   '/safaris': typeof SafarisRouteWithChildren
+  '/tarangire': typeof TarangireRoute
+  '/zanzibar': typeof ZanzibarRoute
   '/safaris/$slug': typeof SafarisSlugRoute
+  '/safaris/': typeof SafarisIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -68,8 +96,11 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/destinations': typeof DestinationsRoute
   '/gallery': typeof GalleryRoute
-  '/safaris': typeof SafarisRouteWithChildren
+  '/ngorongoro': typeof NgorongoroRoute
+  '/tarangire': typeof TarangireRoute
+  '/zanzibar': typeof ZanzibarRoute
   '/safaris/$slug': typeof SafarisSlugRoute
+  '/safaris': typeof SafarisIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -78,8 +109,12 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/destinations': typeof DestinationsRoute
   '/gallery': typeof GalleryRoute
+  '/ngorongoro': typeof NgorongoroRoute
   '/safaris': typeof SafarisRouteWithChildren
+  '/tarangire': typeof TarangireRoute
+  '/zanzibar': typeof ZanzibarRoute
   '/safaris/$slug': typeof SafarisSlugRoute
+  '/safaris/': typeof SafarisIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -89,8 +124,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/destinations'
     | '/gallery'
+    | '/ngorongoro'
     | '/safaris'
+    | '/tarangire'
+    | '/zanzibar'
     | '/safaris/$slug'
+    | '/safaris/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -98,8 +137,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/destinations'
     | '/gallery'
-    | '/safaris'
+    | '/ngorongoro'
+    | '/tarangire'
+    | '/zanzibar'
     | '/safaris/$slug'
+    | '/safaris'
   id:
     | '__root__'
     | '/'
@@ -107,8 +149,12 @@ export interface FileRouteTypes {
     | '/contact'
     | '/destinations'
     | '/gallery'
+    | '/ngorongoro'
     | '/safaris'
+    | '/tarangire'
+    | '/zanzibar'
     | '/safaris/$slug'
+    | '/safaris/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -117,7 +163,10 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DestinationsRoute: typeof DestinationsRoute
   GalleryRoute: typeof GalleryRoute
+  NgorongoroRoute: typeof NgorongoroRoute
   SafarisRoute: typeof SafarisRouteWithChildren
+  TarangireRoute: typeof TarangireRoute
+  ZanzibarRoute: typeof ZanzibarRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -157,12 +206,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ngorongoro': {
+      id: '/ngorongoro'
+      path: '/ngorongoro'
+      fullPath: '/ngorongoro'
+      preLoaderRoute: typeof NgorongoroRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/safaris': {
       id: '/safaris'
       path: '/safaris'
       fullPath: '/safaris'
       preLoaderRoute: typeof SafarisRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/tarangire': {
+      id: '/tarangire'
+      path: '/tarangire'
+      fullPath: '/tarangire'
+      preLoaderRoute: typeof TarangireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/zanzibar': {
+      id: '/zanzibar'
+      path: '/zanzibar'
+      fullPath: '/zanzibar'
+      preLoaderRoute: typeof ZanzibarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/safaris/': {
+      id: '/safaris/'
+      path: '/'
+      fullPath: '/safaris/'
+      preLoaderRoute: typeof SafarisIndexRouteImport
+      parentRoute: typeof SafarisRoute
     }
     '/safaris/$slug': {
       id: '/safaris/$slug'
@@ -176,10 +253,12 @@ declare module '@tanstack/react-router' {
 
 interface SafarisRouteChildren {
   SafarisSlugRoute: typeof SafarisSlugRoute
+  SafarisIndexRoute: typeof SafarisIndexRoute
 }
 
 const SafarisRouteChildren: SafarisRouteChildren = {
   SafarisSlugRoute: SafarisSlugRoute,
+  SafarisIndexRoute: SafarisIndexRoute,
 }
 
 const SafarisRouteWithChildren =
@@ -191,7 +270,10 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DestinationsRoute: DestinationsRoute,
   GalleryRoute: GalleryRoute,
+  NgorongoroRoute: NgorongoroRoute,
   SafarisRoute: SafarisRouteWithChildren,
+  TarangireRoute: TarangireRoute,
+  ZanzibarRoute: ZanzibarRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

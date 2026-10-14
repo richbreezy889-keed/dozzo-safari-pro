@@ -1,4 +1,5 @@
 import { Link, useRouterState } from "@tanstack/react-router";
+import logo from "@/assets/dozzo-safari-logo.svg";
 import { ArrowUpRight, Instagram, Menu, MessageCircle, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -7,6 +8,7 @@ import { whatsappUrl } from "./data";
 const nav = [
   ["Home", "/"],
   ["Safaris", "/safaris"],
+  ["Zanzibar", "/zanzibar"],
   ["Destinations", "/destinations"],
   ["About", "/about"],
   ["Gallery", "/gallery"],
@@ -16,7 +18,7 @@ const nav = [
 export function Brand() {
   return (
     <Link to="/" className="group flex items-center gap-3" aria-label="Dozzo Safari home">
-      <span className="grid size-9 place-items-center border border-primary font-display text-sm font-black text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">D</span>
+      <span className="grid size-9 place-items-center bg-primary/5"><img src={logo} alt="" className="size-9 object-contain" /></span>
       <span className="leading-none">
         <span className="block font-display text-lg font-black text-hero-foreground">DOZZO</span>
         <span className="block text-[9px] font-bold uppercase text-primary">Safari Tanzania</span>
@@ -79,5 +81,5 @@ function FooterLinks({ title, links }: { title: string; links: readonly (readonl
 }
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
-  return <><Header /><main>{children}</main><Footer /><Button asChild size="icon" className="fixed bottom-5 right-5 z-30 size-12 rounded-full shadow-xl md:hidden"><a href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="WhatsApp Dozzo Safari"><MessageCircle /></a></Button></>;
+  return <><Header /><main>{children}</main><Footer /><Button asChild size="icon" className="fixed bottom-5 right-5 z-30 size-12 rounded-full shadow-xl"><a href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="Contact Dozzo Safari on WhatsApp"><MessageCircle /></a></Button></>;
 }
