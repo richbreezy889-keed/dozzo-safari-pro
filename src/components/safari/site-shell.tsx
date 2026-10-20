@@ -19,10 +19,10 @@ export function Brand({ size = "default" }: { size?: "default" | "lg" }) {
   const large = size === "lg";
   return (
     <Link to="/" className="group flex items-center gap-3" aria-label="Dozzo Safari home">
-      <span className={`grid ${large ? "size-12" : "size-9"} place-items-center bg-primary/5`}><img src={logo} alt="" className={`${large ? "size-12" : "size-9"} object-contain`} /></span>
+      <span className={`grid ${large ? "size-16" : "size-9"} place-items-center bg-primary/5`}><img src={logo} alt="" className={`${large ? "size-16" : "size-9"} object-contain`} /></span>
       <span className="leading-none">
-        <span className={`block font-display ${large ? "text-xl" : "text-lg"} font-black ${large ? "text-foreground" : "text-hero-foreground"}`}>DOZZO</span>
-        <span className={`block ${large ? "text-[10px]" : "text-[9px]"} font-bold uppercase text-primary`}>Safari Tanzania</span>
+        <span className={`block font-display ${large ? "text-2xl" : "text-lg"} font-black ${large ? "text-foreground" : "text-hero-foreground"}`}>DOZZO</span>
+        <span className={`block ${large ? "text-[11px]" : "text-[9px]"} font-bold uppercase text-primary`}>Safari Tanzania</span>
       </span>
     </Link>
   );
