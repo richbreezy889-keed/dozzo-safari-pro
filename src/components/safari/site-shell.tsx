@@ -15,13 +15,14 @@ const nav = [
   ["Contact", "/contact"],
 ] as const;
 
-export function Brand() {
+export function Brand({ size = "default" }: { size?: "default" | "lg" }) {
+  const large = size === "lg";
   return (
     <Link to="/" className="group flex items-center gap-3" aria-label="Dozzo Safari home">
-      <span className="grid size-9 place-items-center bg-primary/5"><img src={logo} alt="" className="size-9 object-contain" /></span>
+      <span className={`grid ${large ? "size-12" : "size-9"} place-items-center bg-primary/5`}><img src={logo} alt="" className={`${large ? "size-12" : "size-9"} object-contain`} /></span>
       <span className="leading-none">
-        <span className="block font-display text-lg font-black text-hero-foreground">DOZZO</span>
-        <span className="block text-[9px] font-bold uppercase text-primary">Safari Tanzania</span>
+        <span className={`block font-display ${large ? "text-xl" : "text-lg"} font-black ${large ? "text-foreground" : "text-hero-foreground"}`}>DOZZO</span>
+        <span className={`block ${large ? "text-[10px]" : "text-[9px]"} font-bold uppercase text-primary`}>Safari Tanzania</span>
       </span>
     </Link>
   );
@@ -33,9 +34,9 @@ export function Header() {
   useEffect(() => setOpen(false), [pathname]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-hero-foreground/10 bg-header">
+    <header className="sticky top-0 z-40 border-b border-border bg-warm">
       <div className="site-container flex h-20 items-center justify-between">
-        <Brand />
+        <Brand size="lg" />
         <nav className="hidden items-center gap-7 lg:flex" aria-label="Main navigation">
           {nav.map(([label, to]) => (
             <Link key={to} to={to} activeOptions={{ exact: to === "/" }} className="nav-link" activeProps={{ className: "nav-link-active" }}>{label}</Link>
@@ -44,15 +45,15 @@ export function Header() {
         <Button asChild size="xl" className="hidden lg:inline-flex">
           <a href={whatsappUrl} target="_blank" rel="noreferrer">Plan Your Safari <ArrowUpRight /></a>
         </Button>
-        <Button variant="ghost" size="icon" onClick={() => setOpen((value) => !value)} className="text-hero-foreground hover:bg-hero-foreground/10 hover:text-hero-foreground lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
+        <Button variant="ghost" size="icon" onClick={() => setOpen((value) => !value)} className="text-foreground hover:bg-foreground/5 hover:text-foreground lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open}>
           {open ? <X /> : <Menu />}
         </Button>
       </div>
       {open && (
-        <div className="border-t border-hero-foreground/10 bg-header px-5 pb-6 pt-3 lg:hidden">
+        <div className="border-t border-border bg-warm px-5 pb-6 pt-3 lg:hidden">
           <nav className="flex flex-col" aria-label="Mobile navigation">
             {nav.map(([label, to]) => (
-              <Link key={to} to={to} className="border-b border-hero-foreground/10 py-4 font-display text-xl font-bold text-hero-foreground">{label}</Link>
+              <Link key={to} to={to} className="border-b border-border py-4 font-display text-xl font-bold text-foreground">{label}</Link>
             ))}
           </nav>
           <Button asChild size="xl" className="mt-5 w-full"><a href={whatsappUrl} target="_blank" rel="noreferrer"><MessageCircle /> Plan Your Safari</a></Button>

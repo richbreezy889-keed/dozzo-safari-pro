@@ -168,8 +168,8 @@
 @utility page-title { font-family: var(--font-display); font-size: clamp(2.5rem, 5.2vw, 5.4rem); line-height: 1.02; font-weight: 800; }
 @utility section-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 4rem); line-height: 1.08; font-weight: 800; }
 @utility eyebrow { display: flex; align-items: center; gap: 0.75rem; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; & span { width: 2.25rem; height: 2px; background: var(--primary); } }
-@utility nav-link { position: relative; padding-block: 1.9rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--hero-muted); transition: color .2s; &:hover { color: var(--hero-foreground); } &::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 2px; background: var(--primary); transform: scaleX(0); transition: transform .2s; } }
-@utility nav-link-active { color: var(--hero-foreground); &::after { transform: scaleX(1); } }
+@utility nav-link { position: relative; padding-block: 1.9rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--muted-foreground); transition: color .2s; &:hover { color: var(--foreground); } &::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 2px; background: var(--primary); transform: scaleX(0); transition: transform .2s; } }
+@utility nav-link-active { color: var(--foreground); &::after { transform: scaleX(1); } }
 @utility safari-card { overflow: hidden; border: 1px solid var(--border); background: var(--background); box-shadow: 0 16px 50px oklch(0.1 0 0 / .06); }
 @utility destination-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; @media (min-width: 768px) { grid-template-columns: repeat(2, 1fr); } @media (min-width: 1024px) { grid-template-columns: repeat(3, 1fr); } }
 @utility destination-card { position: relative; isolation: isolate; min-height: 29rem; overflow: hidden; @media (min-width: 768px) { &:first-child { min-height: 36rem; } } }
