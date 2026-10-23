@@ -16,6 +16,9 @@ import zanzibarBeach from "@/assets/zanzibar-beach.webp";
 export const whatsappDigits = "255713956532";
 export const whatsappNumber = "+255 713 956 532";
 
+export const emailAddress = "dozzoyassin@dozzosafari.com";
+export const emailUrl = `mailto:${emailAddress}`;
+
 export function buildWhatsAppUrl(message: string): string {
   return `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(message)}`;
 }

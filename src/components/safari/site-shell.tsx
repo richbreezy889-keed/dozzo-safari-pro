@@ -1,9 +1,9 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import logo from "@/assets/dozzo-safari-logo.svg";
-import { ArrowUpRight, Instagram, Menu, MessageCircle, Phone, X } from "lucide-react";
+import { ArrowUpRight, Instagram, Mail, Menu, MessageCircle, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { whatsappUrl } from "./data";
+import { emailAddress, emailUrl, whatsappUrl } from "./data";
 
 const nav = [
   ["Home", "/"],
@@ -70,7 +70,7 @@ export function Footer() {
         <div><Brand /><p className="mt-6 max-w-xs text-sm leading-7 text-hero-muted">Tanzania Safari Experiences, planned with care and rooted in the wild landscapes of our home.</p></div>
         <FooterLinks title="Navigate" links={nav.slice(0, 4)} />
         <FooterLinks title="Discover" links={[["Gallery", "/gallery"], ["Contact", "/contact"], ["Mikumi", "/destinations"], ["Serengeti", "/destinations"]]} />
-        <div><p className="footer-title">Talk to Dozzo</p><a className="footer-contact" href="tel:+255713956532"><Phone /> +255 713 956 532</a><a className="footer-contact" href={whatsappUrl} target="_blank" rel="noreferrer"><MessageCircle /> WhatsApp</a><p className="footer-contact"><Instagram /> Dozzo_safari</p></div>
+        <div><p className="footer-title">Talk to Dozzo</p><a className="footer-contact" href="tel:+255713956532"><Phone /> +255 713 956 532</a><a className="footer-contact" href={whatsappUrl} target="_blank" rel="noreferrer"><MessageCircle /> WhatsApp</a><a className="footer-contact" href={emailUrl}><Mail /> {emailAddress}</a><p className="footer-contact"><Instagram /> Dozzo_safari</p></div>
       </div>
       <div className="border-t border-hero-foreground/10"><div className="site-container flex flex-col gap-2 py-6 text-xs text-hero-muted sm:flex-row sm:items-center sm:justify-between"><p>© 2026 Dozzo Safari. Tanzania.</p><p>Travel thoughtfully. Leave only footprints.</p></div></div>
     </footer>
